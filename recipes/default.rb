@@ -17,6 +17,7 @@
 
 case node[:platform]
 when "debian", "ubuntu"
+  require_recipe "git"
   git "/usr/share/drush" do
     repository "git://git.drupalcode.org/project/drush.git"
     reference "7.x-4.4"
@@ -30,11 +31,10 @@ when "debian", "ubuntu"
     not_if { File.exists?("/usr/bin/drush") }
     only_if { File.exists?("/usr/share/drush/drush") }
   end
-
-  bash "install-console-table" do
-    code <<-EOH
-    (pear install Console_Table)
-    EOH
-    not_if "pear list| grep Console_Table"
+  
+  include_recipe "php"
+  php_pear "Console_Table" do
+    action :install
   end
+
 end
