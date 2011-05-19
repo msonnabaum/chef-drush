@@ -1,6 +1,9 @@
-# Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
+#
 # Cookbook Name::  drush
-# Recipe:: default
+# Recipe:: make
+#
+# Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
+# Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,25 +19,20 @@
 #
 
 case node[:platform]
-when "debian", "ubuntu"
-  git "/usr/share/drush" do
-    repository "git://git.drupalcode.org/project/drush.git"
-    reference "master"
+when "debian", "ubuntu", "arch"
+
+  require_recipe "drush"
+
+  git "/usr/share/drush_make" do
+    repository "git://git.drupalcode.org/project/drush_make.git"
+    reference "6.x-2.2"
     action :sync
   end
-  
-  bash "make-drush-symlink" do
-    code <<-EOH
-    (ln -s /usr/share/drush/drush /usr/bin/drush)
-    EOH
-    not_if { File.exists?("/usr/bin/drush") }
-    only_if { File.exists?("/usr/share/drush/drush") }
+
+  link "/usr/bin/drush_make" do
+    to "/usr/share/drush_make"
+    not_if "test -f /usr/bin/drush_make/drush_make.drush.inc"
+    only_if "test -f /usr/share/drush_make/drush_make.drush.inc"
   end
 
-  bash "install-console-table" do
-    code <<-EOH
-    (pear install Console_Table)
-    EOH
-    not_if "pear list| grep Console_Table"
-  end
 end
