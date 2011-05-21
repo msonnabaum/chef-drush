@@ -26,9 +26,9 @@ when "debian", "ubuntu"
     action :sync
   end
 
-  link "/usr/bin/drush_make" do
+  link "/usr/share/drush/commands/drush_make" do
     to "/usr/share/drush_make"
-    not_if "test -f /usr/bin/drush_make/drush_make.drush.inc"
+    not_if "test -f /usr/share/drush/commands/drush_make/drush_make.drush.inc"
     only_if "test -f /usr/share/drush_make/drush_make.drush.inc"
   end
 
