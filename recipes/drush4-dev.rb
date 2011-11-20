@@ -16,7 +16,7 @@
 #
 
 case node[:platform]
-when "debian", "ubuntu"
+when "debian", "ubuntu", "centos"
   git "/usr/share/drush" do
     repository "git://git.drupalcode.org/project/drush.git"
     reference "7.x-4.x"
