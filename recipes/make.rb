@@ -29,10 +29,13 @@ when "debian", "ubuntu", "arch"
     action :sync
   end
 
-  link "/usr/bin/drush_make" do
-    to "/usr/share/drush_make"
-    not_if "test -f /usr/bin/drush_make/drush_make.drush.inc"
-    only_if "test -f /usr/share/drush_make/drush_make.drush.inc"
+  node['drush']['references'].each do |ref|
+    link "/usr/share/drush-#{ref}/commands/drush_make" do
+      to "/usr/share/drush_make"
+      not_if "test -f /usr/share/drush-#{ref}/commands/drush_make/drush_make.drush.inc"
+      only_if "test -f /usr/share/drush_make/drush_make.drush.inc"
+    end
   end
+
 
 end
