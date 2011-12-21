@@ -1,6 +1,6 @@
 # 
 # Cookbook Name:: drush
-# Recipe:: default
+# Attributes:: drush
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,23 +15,4 @@
 # limitations under the License.
 #
 
-include_recipe "php"
-
-# Upgrade PEAR to latest stable version
-# For example, 1.9.4 works for drush, but 1.9.0 does not
-php_pear 'pear' do
-  preferred_state "stable"
-  action :upgrade
-end
-
-# Initialize drush PEAR channel
-dc = php_pear_channel "pear.drush.org" do
-  action :discover
-end
-
-# Install drush
-php_pear "drush" do
-  version node[:drush][:version]
-  channel dc.channel_name
-  action :install
-end
+default[:drush][:version] = "4.5.0"
