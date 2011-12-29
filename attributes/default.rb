@@ -1,6 +1,7 @@
 # 
+# Author:: David King <dking@xforty.com>
 # Cookbook Name:: drush
-# Attributes:: drush
+# Attributes:: default
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,5 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# Pear search does not currently work with the preferred state. So we have to
+# specify a default version for now.  https://pear.php.net/bugs/bug.php?id=19138
+# TODO: implement preferred_state attribute and logic once pear bug is fixed
 
 default[:drush][:version] = "4.5.0"
