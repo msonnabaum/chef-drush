@@ -1,4 +1,5 @@
 # 
+# Author:: David King <dking@xforty.com>
 # Cookbook Name:: drush
 # Recipe:: make
 #
