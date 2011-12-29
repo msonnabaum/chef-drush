@@ -40,5 +40,5 @@ drush_make was previously installed, this command will not be run.
 
 = USAGE:
 
-Simply include the `drush` or `drush::make` recipe where ever you would 
+Simply include the `drush` or `drush::make` recipe wherever you would
 like drush installed.
