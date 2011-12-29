@@ -1,4 +1,5 @@
 # 
+# Author:: David King <dking@xforty.com>
 # Cookbook Name:: drush
 # Attributes:: make
 #
@@ -15,5 +16,5 @@
 # limitations under the License.
 #
 
-default[:drush][:make][:version] = "6.x-2.3"
+default[:drush][:make][:version]     = "6.x-2.3"
 default[:drush][:make][:install_dir] = "/usr/share/php/drush/commands"
