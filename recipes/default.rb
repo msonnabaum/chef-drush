@@ -17,11 +17,11 @@
 
 include_recipe "php"
 
-# Upgrade PEAR to latest stable version
-# For example, 1.9.4 works for drush, but 1.9.0 does not
-php_pear 'pear' do
-  preferred_state "stable"
+# Upgrade PEAR if current version is < 1.9.1
+php_pear "pear" do
+  cur_version = `pear -V| head -1| awk -F': ' '{print $2}'`
   action :upgrade
+  not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
 end
 
 # Initialize drush PEAR channel
