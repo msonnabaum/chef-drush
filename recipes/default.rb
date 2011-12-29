@@ -1,4 +1,5 @@
 # 
+# Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
 # Cookbook Name:: drush
 # Recipe:: default
 #
