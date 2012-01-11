@@ -36,3 +36,8 @@ php_pear "drush" do
   channel dc.channel_name
   action :install
 end
+
+# Install Console_Table
+php_pear "Console_Table" do
+  action :install
+end
