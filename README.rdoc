@@ -1,0 +1,44 @@
+= DESCRIPTION:
+
+Installs drush via PEAR packages. Also included is a recipe that can be used 
+to install drush_make via the `drush pm-download` command.
+
+= REQUIREMENTS:
+
+* Opscode's php cookbook - http://community.opscode.com/cookbooks/php/
+
+= PLATFORMS:
+
+The following platforms are supported by this cookbook, meaning that the 
+recipes run on these platforms without error.
+
+* Debian
+* Ubuntu
+* CentOS
+
+= RECIPES:
+
+== default:
+
+Includes the default recipe in a run list
+
+== make:
+
+Executes a drush command to install drush_make.  If any version of 
+drush_make was previously installed, this command will not be run.
+
+= ATTRIBUTES:
+
+== default:
+
+* node[:drush][:version] - version from http://pear.drush.org/
+
+== make:
+
+* node[:drush][:make][:version] - version from http://www.drupal.org/project/drush_make/
+* node[:drush][:make][:install_dir] - where the command should be installed
+
+= USAGE:
+
+Simply include the `drush` or `drush::make` recipe wherever you would
+like drush installed.

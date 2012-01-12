@@ -1,6 +1,6 @@
 # Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
-# Cookbook Name::  drush
-# Recipe:: default
+# Cookbook Name:: drush
+# Recipe:: dev
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
