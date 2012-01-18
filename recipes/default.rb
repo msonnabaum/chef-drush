@@ -41,3 +41,15 @@ end
 php_pear "Console_Table" do
   action :install
 end
+
+# drush make uses of all these tools on the command line.  It is very helpful
+# to have them there when you need it.
+
+package "git"
+package "subversion"
+package "bzr"
+package "wget"
+package "curl"
+package "tar"
+package "gzip"
+package "zip"
