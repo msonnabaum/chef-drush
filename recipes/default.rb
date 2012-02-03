@@ -45,7 +45,12 @@ end
 # drush make uses of all these tools on the command line.  It is very helpful
 # to have them there when you need it.
 
-package "git"
+if platform?("ubuntu") && (node.platform_version.to_f < 10.10 )
+  package "git-core"
+else
+  package "git"
+end
+
 package "subversion"
 package "bzr"
 package "wget"
