@@ -41,3 +41,29 @@ end
 php_pear "Console_Table" do
   action :install
 end
+
+# drush make uses of all these tools on the command line.  It is very helpful
+# to have them there when you need it.
+
+if platform?("ubuntu") && (node.platform_version.to_f < 10.10 )
+  package "git-core"
+else
+  package "git"
+end
+
+# If we are running under vagrant and the .drush directory is available symlink
+# it into the vagrant user directory automatically
+
+link "/home/vagrant/.drush" do
+  to "/vagrant/.drush"
+  only_if "test -d /vagrant/.drush"
+end
+
+
+package "subversion"
+package "bzr"
+package "wget"
+package "curl"
+package "tar"
+package "gzip"
+package "zip"
