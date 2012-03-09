@@ -31,7 +31,7 @@ when "debian", "ubuntu", "arch"
 
   node['drush']['references'].each do |ref|
     git "#{install_path}-#{ref}" do
-      repository "git://git.drupalcode.org/project/drush.git"
+      repository "http://git.drupal.org/project/drush.git"
       reference ref
       action :sync
     end

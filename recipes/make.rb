@@ -24,7 +24,7 @@ when "debian", "ubuntu", "arch"
   require_recipe "drush"
 
   git "/usr/share/drush_make" do
-    repository "git://git.drupalcode.org/project/drush_make.git"
+    repository "http://git.drupal.org/project/drush_make.git"
     reference "6.x-2.2"
     action :sync
   end
