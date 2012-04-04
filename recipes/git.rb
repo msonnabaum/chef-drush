@@ -1,7 +1,7 @@
-# 
-# Author:: David King <dking@xforty.com>
+# Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
+# Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
-# Attributes:: make
+# Recipe:: git
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,5 +16,17 @@
 # limitations under the License.
 #
 
-default[:drush][:make][:version]     = "6.x-2.3"
-default[:drush][:make][:install_dir] = "/usr/share/php/drush/commands"
+require_recipe "git"
+
+case node[:platform]
+when "debian", "ubuntu", "centos"
+  git node['drush']['install_dir'] do
+    repository "git://git.drupalcode.org/project/drush.git"
+    reference node['drush']['version']
+    action :sync
+  end
+  
+  link "/usr/bin/drush" do
+    to "#{node['drush']['install_dir']}/drush"
+  end
+end
