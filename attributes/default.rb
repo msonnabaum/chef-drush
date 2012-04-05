@@ -1,5 +1,6 @@
 # 
 # Author:: David King <dking@xforty.com>
+# Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
 # Attributes:: default
 #
@@ -20,4 +21,13 @@
 # specify a default version for now.  https://pear.php.net/bugs/bug.php?id=19138
 # TODO: implement preferred_state attribute and logic once pear bug is fixed
 
-default[:drush][:version] = "4.5.0"
+# Options: pear, git
+default['drush']['install_method'] = "pear"
+
+# Used for drush install via git and make install (PEAR stores here by default).
+default['drush']['install_dir'] = "/usr/share/php/drush"
+
+# When installing via PEAR, this is the x.y.z pear version (eg. 4.5.0)
+# When installing via Git, this is a commit/tag/branch reference (eg. 6e4c1e22f0b / 7.x-4.5 / 7.x-4.x)
+default['drush']['version'] = "5.0.0"
+default['drush']['make']['version'] = "2.3"

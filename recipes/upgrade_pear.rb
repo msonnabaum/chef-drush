@@ -1,7 +1,8 @@
 # 
-# Author:: David King <dking@xforty.com>
+# Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
+# Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
-# Recipe:: make
+# Recipe:: upgrade_pear
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +17,9 @@
 # limitations under the License.
 #
 
-# Make sure drush is installed first
-include_recipe "drush"
-
-# Install drush_make
-# TODO: come up with a way to allow users to update drush_make
-execute "install_drush_make" do
-  command "drush dl drush_make-6.x-#{node['drush']['make']['version']} --destination=#{node['drush']['install_dir']}/commands"
-  not_if "drush make --help"
+# Upgrade PEAR if current version is < 1.9.1
+cur_version = `pear -V 2>&1 | head -1 | awk '{print $NF}' | tr -d '\n'`
+php_pear "pear" do
+  action :upgrade
+  not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
 end

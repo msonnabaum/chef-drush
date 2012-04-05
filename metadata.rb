@@ -5,13 +5,16 @@ description      "Installs drush"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.9.2"
 depends          "php"
+recommends       "git"
+suggests         "subversion"
 
-recipe           "drush",             "Installs drush"
-recipe           "drush::make",       "Installs drush_make, first making sure drush is installed"
-recipe           "drush::dev",        "Installs master branch of drush from git"
-recipe           "drush::drush4-dev", "Installs 7.x-4.x branch of drush from git"
+recipe           "drush",       "Installs Drush and dependencies."
+recipe           "drush::pear", "Installs Drush via PEAR."
+recipe           "drush::git",  "Installs Drush via Git (drupal.org repository)"
+recipe           "drush::make", "Installs Drush Make via Drush. NOT required for Drush 5."
 
 %w{ debian ubuntu centos }.each do |os|
   supports os
 end
+
 
