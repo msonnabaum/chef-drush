@@ -1,7 +1,7 @@
 = DESCRIPTION:
 
-Installs drush via PEAR packages. Also included is a recipe that can be used 
-to install drush_make via the `drush pm-download` command.
+Installs the Drush CLI tool for Drupal, either via PEAR package or directly from source via Git.
+Also included is a recipe that can be used to install drush_make via the `drush pm-download` command.
 
 = REQUIREMENTS:
 
