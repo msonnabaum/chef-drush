@@ -1,7 +1,7 @@
 = DESCRIPTION:
 
-Installs drush via PEAR packages. Also included is a recipe that can be used 
-to install drush_make via the `drush pm-download` command.
+Installs the Drush CLI tool for Drupal, either via PEAR package or directly from source via Git.
+Also included is a recipe that can be used to install drush_make via the `drush pm-download` command.
 
 = REQUIREMENTS:
 
@@ -20,25 +20,42 @@ recipes run on these platforms without error.
 
 == default:
 
-Includes the default recipe in a run list
+Installs drush using the desired `install_method` recipe, and
+also includes minor recipes to meet dependencies.
+
+== pear:
+
+Installs drush via PEAR package manager.
+
+== git:
+
+Install drush via Git from source repository.
+
+== upgrade_pear:
+
+Upgrades PEAR to minimum required by drush via PEAR.
+
+== install_console_table:
+
+Installs PEAR Console_Table extension dependency.
 
 == make:
 
-Executes a drush command to install drush_make.  If any version of 
-drush_make was previously installed, this command will not be run.
+Executes a drush command to install drush_make.  If the `drush make` command
+is already available, this command will not be run.
 
 = ATTRIBUTES:
 
 == default:
 
-* node[:drush][:version] - version from http://pear.drush.org/
-
-== make:
-
-* node[:drush][:make][:version] - version from http://www.drupal.org/project/drush_make/
-* node[:drush][:make][:install_dir] - where the command should be installed
+* `node['drush']['install_method']` - Indicates the desired install method, currently either `git` or `pear`.
+* `node['drush']['version']` - Drush version of format x.y.z when install_method is pear (eg. 5.0.0).
+When install_method is git, the format is a git reference commit/tag/branch (eg. 31d768a / 7.x-4.x / 7.x-5.0 )
+* `node['drush']['make']['version']` - Drush Make version of format x.y
+* `node['drush']['install_dir']` - Where to install Drush via Git. Used to install Drush Make as well.
 
 = USAGE:
 
 Simply include the `drush` or `drush::make` recipe wherever you would
-like drush installed.
+like drush installed. You may alter the `install_method` and `version`
+attributes appropriately.
