@@ -33,7 +33,7 @@ Install drush via Git from source repository.
 
 == upgrade_pear:
 
-Upgrades PEAR to v1.9.4, which meets minimum required by drush via PEAR.
+Upgrades PEAR to v1.9.1, which meets minimum required by drush via PEAR.
 
 == install_console_table:
 

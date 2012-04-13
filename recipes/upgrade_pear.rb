@@ -17,23 +17,12 @@
 # limitations under the License.
 #
 
-# Drush PEAR channel requires > 1.9.0 due to hosting
+# Drush PEAR channel requires >= 1.9.1 due to hosting
 # on GitHub, where PEAR repo uses CNAME record.
 
-original_pear_version = nil
-
-ruby_block "check_pear_version" do
-  block do
-    original_pear_version = %x[ pear -V 2>&1 ].match(/PEAR.*(\d+\.\d+\.\d+)/)[1]
-    original_pear_version = Gem::Version.create(original_pear_version)
-  end
-end
-
-declared_pear_version = Gem::Version.create("1.9.4")
-
-php_pear "PEAR" do
-  version declared_pear_version.to_s
-  options "--force"
-  action :install
-  only_if { original_pear_version != declared_pear_version }
+# Chef resources need unique names in case in run_list twice.
+php_pear "PEAR-drush" do
+  package_name "PEAR"
+  version "1.9.1"
+  action :upgrade
 end
