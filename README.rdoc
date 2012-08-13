@@ -49,8 +49,9 @@ is already available, this command will not be run.
 == default:
 
 * `node['drush']['install_method']` - Indicates the desired install method, currently either `git` or `pear`.
-* `node['drush']['version']` - Drush version of format x.y.z when install_method is pear (eg. 5.0.0).
+* `node['drush']['version']` - Drush preferred state (stable, beta, devel) or version of format x.y.z when install_method is pear (eg. 5.0.0).
 When install_method is git, the format is a git reference commit/tag/branch (eg. 31d768a / 7.x-4.x / 7.x-5.0 )
+* `node['drush']['allreleases']` - URL of allreleases.xml for pear to install from preferred states.
 * `node['drush']['make']['version']` - Drush Make version of format x.y
 * `node['drush']['install_dir']` - Where to install Drush via Git. Used to install Drush Make as well.
 
