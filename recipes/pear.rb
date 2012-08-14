@@ -19,6 +19,20 @@
 
 include_recipe "php"
 
+# If drush version is a preferred state, get the latest version of that state
+case node['drush']['version']
+when 'stable', 'beta', 'devel'
+  require 'rexml/document'
+  require 'open-uri'
+  xml = REXML::Document.new(open(node['drush']['allreleases']))
+  xml.root.each_element('r') do |release|
+    if release.text('s') == node['drush']['version']
+      node['drush']['version'] = release.text('v')
+      break
+    end
+  end
+end
+
 # Initialize drush PEAR channel
 dc = php_pear_channel "pear.drush.org" do
   action :discover
