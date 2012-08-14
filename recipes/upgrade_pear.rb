@@ -17,9 +17,12 @@
 # limitations under the License.
 #
 
-# Upgrade PEAR if current version is < 1.9.1
-cur_version = `pear -V 2>&1 | head -1 | awk '{print $NF}' | tr -d '\n'`
-php_pear "pear" do
+# Drush PEAR channel requires >= 1.9.1 due to hosting
+# on GitHub, where PEAR repo uses CNAME record.
+
+# Chef resources need unique names in case in run_list twice.
+php_pear "PEAR-drush" do
+  package_name "PEAR"
+  version "1.9.1"
   action :upgrade
-  not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
 end
