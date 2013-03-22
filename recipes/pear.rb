@@ -27,7 +27,7 @@ when 'stable', 'beta', 'devel'
   xml = REXML::Document.new(open(node['drush']['allreleases']))
   xml.root.each_element('r') do |release|
     if release.text('s') == node['drush']['version']
-      node['drush']['version'] = release.text('v')
+      node.default['drush']['version'] = release.text('v')
       break
     end
   end
