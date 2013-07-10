@@ -13,7 +13,7 @@ recipe           "drush::pear", "Installs Drush via PEAR."
 recipe           "drush::git",  "Installs Drush via Git (drupal.org repository)"
 recipe           "drush::make", "Installs Drush Make via Drush. NOT required for Drush 5."
 
-%w{ debian ubuntu centos }.each do |os|
+%w{ debian ubuntu centos redhat }.each do |os|
   supports os
 end
 
