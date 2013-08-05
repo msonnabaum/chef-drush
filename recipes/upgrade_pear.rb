@@ -16,22 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#
+
 # Drush PEAR channel requires >= 1.9.1 due to hosting
 # on GitHub, where PEAR repo uses CNAME record.
 
 # Chef resources need unique names in case in run_list twice.
-@target_version = "1.9.1"
-@current_version = ""
-
-ruby_block "PEAR current version" do
-  block do
-    @current_version = `pear -V| head -1| awk -F': ' '{print $2}'`
-  end
-end
-
-php_pear "PEAR" do
+php_pear "PEAR-drush" do
+  package_name "PEAR"
+  version "1.9.1"
   action :upgrade
-  version @target_version
-  not_if { Gem::Version.new(@current_version) > Gem::Version.new(@target_version) }
 end
