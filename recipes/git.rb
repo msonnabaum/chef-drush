@@ -21,7 +21,7 @@ require_recipe "git"
 case node[:platform]
 when "debian", "ubuntu", "centos", "redhat"
   git node['drush']['install_dir'] do
-    repository "git://git.drupalcode.org/project/drush.git"
+    repository "https://github.com/drush-ops/drush.git"
     reference node['drush']['version']
     action :sync
   end
