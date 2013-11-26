@@ -6,7 +6,6 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.10.0"
 depends          "php"
 recommends       "git"
-suggests         "subversion"
 
 recipe           "drush",       "Installs Drush and dependencies."
 recipe           "drush::pear", "Installs Drush via PEAR."
