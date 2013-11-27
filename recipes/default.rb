@@ -19,6 +19,6 @@
 
 include_recipe "php"
 # Upgrade PEAR if current version is < 1.9.1
-include_recipe "drush::upgrade_pear" if node['drush']['install_method'] == "pear"
-include_recipe "drush::install_console_table"
-include_recipe "drush::#{node['drush']['install_method']}"
+include_recipe "chef-drush::upgrade_pear" if node['drush']['install_method'] == "pear"
+include_recipe "chef-drush::install_console_table"
+include_recipe "chef-drush::#{node['drush']['install_method']}"

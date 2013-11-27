@@ -17,7 +17,7 @@
 #
 
 # Make sure drush is installed first
-include_recipe "drush"
+include_recipe "chef-drush"
 
 # Install drush_make
 # TODO: come up with a way to allow users to update drush_make
