@@ -59,19 +59,11 @@ If the <tt>drush make</tt> command is already available, this recipe will not be
 
 === install_method
 
-This attribute is used in the <tt>drush::default</tt> recipe only.
-
-Specifies whether to install Drush using PEAR (+pear+) or by cloning from source (+git+).
-
-Defaults to +pear+.
+This attribute is used in the <tt>drush::default</tt> recipe only and specifies whether to install Drush using PEAR (+pear+) or by cloning from source (+git+). Defaults to +pear+.
 
 === install_dir
 
-This attribute is used in the <tt>drush::git</tt> recipe.
-
-Specifies where Drush should be installed to.
-
-Defaults to <tt>/usr/share/php/drush</tt>.
+This attribute is used in the <tt>drush::git</tt> recipe and specifies where Drush should be installed to. Defaults to <tt>/usr/share/php/drush</tt>.
 
 === version
 
@@ -83,15 +75,11 @@ Defaults to +stable+.
 
 === allreleases
 
-This attribute is used in the in the <tt>drush::pear</tt> recipe.
-
-Specifies where to get a list of available Drush releases.
-
-Defaults to <tt>http://pear.drush.org/rest/r/drush/allreleases.xml</tt>.
+This attribute is used in the in the <tt>drush::pear</tt> recipe and specifies where to get a list of available Drush releases. Defaults to <tt>http://pear.drush.org/rest/r/drush/allreleases.xml</tt>.
 
 === make
 
-This attribute is used in the <tt>drush::make</tt> recipe
+This attribute is used in the <tt>drush::make</tt> recipe.
 
 * <tt>node['drush']['make']['version']</tt> - Specifies the version of Drush Make to install. Defaults to +2.3+.
 
