@@ -5,7 +5,7 @@ license          "Apache 2.0"
 description      "Installs drush, the Drupal Shell."
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.10.0"
-depends          "php"
+depends          "php", "~> 0.99.0"
 recommends       "git"
 
 recipe           "drush",       "Installs Drush and dependencies."
