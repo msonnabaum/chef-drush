@@ -1,62 +1,119 @@
-= DESCRIPTION:
+= drush Cookbook
 
-Installs the Drush CLI tool for Drupal, either via PEAR package or directly from source via Git.
-Also included is a recipe that can be used to install drush_make via the `drush pm-download` command.
+Installs the {Drush CLI tool}[http://www.drush.org/] for Drupal, either via PEAR package or directly from source via Git.
 
-= REQUIREMENTS:
+If you use Drush 4, this cookbook includes a recipe to install {drush_make}[https://drupal.org/project/drush_make] (via <tt>drush pm-download</tt>).
 
-* Opscode's php cookbook - http://community.opscode.com/cookbooks/php/
+== Requirements
 
-= PLATFORMS:
+=== Chef
 
-The following platforms are supported by this cookbook, meaning that the 
-recipes run on these platforms without error.
+Tested on Chef 11.6.2
+
+=== Cookbooks
+
+* {Opscode's php cookbook}[http://community.opscode.com/cookbooks/php], version 0.99.0 or higher.
+
+=== Platforms
 
 * Debian
 * Ubuntu
-* CentOS
+* Centos
+* Redhat
 
-= RECIPES:
+== Recipes
 
-== default:
+=== default
 
-Installs drush using the desired `install_method` recipe, and
-also includes minor recipes to meet dependencies.
+Runs the recipes +upgrade_pear+, +install_console_table+ and then installs Drush using the recipe specified in <tt>node['drush']['install_method']</tt>, which defaults to +pear+.
 
-== pear:
+=== pear
 
-Installs drush via PEAR package manager.
+Installs drush using the {PEAR package manager}[http://pear.php.net/].
 
-== git:
+It will install the version of Drush specified in <tt>node['drush']['version']</tt>, which defaults to the most recent stable version. The list of available versions is retrieved from the URL specified in <tt>node['drush']['allreleases']</tt>.
 
-Install drush via Git from source repository.
+=== git
 
-== upgrade_pear:
+Install drush by cloning a copy of Drush from it's {source repository}[https://github.com/drush-ops/drush].
 
-Upgrades PEAR to v1.9.1, which meets minimum required by drush via PEAR.
+Drush will be installed to <tt>node['drush']['install_dir']</tt> which defaults to <tt>/usr/share/php/drush</tt>. It will attempt to retrieve the branch, tag or commit specified in <tt>node['drush']['version']</tt>.
 
-== install_console_table:
+=== upgrade_pear
 
-Installs PEAR Console_Table extension dependency.
+Upgrades PEAR to version 1.9.1, which is the minimum required by Drush.
 
-== make:
+=== install_console_table
 
-Executes a drush command to install drush_make.  If the `drush make` command
-is already available, this command will not be run.
+Installs {Console_Table}[http://pear.php.net/package/Console_Table], which is required by Drush.
 
-= ATTRIBUTES:
+=== make
 
-== default:
+If you are running Drush version 4 or older and you want to use {drush_make}[https://drupal.org/project/drush_make], this recipe will install it for you.
 
-* `node['drush']['install_method']` - Indicates the desired install method, currently either `git` or `pear`.
-* `node['drush']['version']` - Drush preferred state (stable, beta, devel) or version of format x.y.z when install_method is pear (eg. 5.0.0).
-When install_method is git, the format is a git reference commit/tag/branch (eg. 31d768a / 7.x-4.x / 7.x-5.0 )
-* `node['drush']['allreleases']` - URL of allreleases.xml for pear to install from preferred states.
-* `node['drush']['make']['version']` - Drush Make version of format x.y
-* `node['drush']['install_dir']` - Where to install Drush via Git. Used to install Drush Make as well.
+It will install the version of +drush_make+ specified in <tt>node['drush']['make']['version']</tt> which defaults to 2.3.
 
-= USAGE:
+If the <tt>drush make</tt> command is already available, this recipe will not be run.
 
-Simply include the `drush` or `drush::make` recipe wherever you would
-like drush installed. You may alter the `install_method` and `version`
-attributes appropriately.
+== Attributes
+
+=== install_method
+
+This attribute is used in the <tt>drush::default</tt> recipe only.
+
+Specifies whether to install Drush using PEAR (+pear+) or by cloning from source (+git+).
+
+Defaults to +pear+.
+
+=== install_dir
+
+This attribute is used in the <tt>drush::git</tt> recipe.
+
+Specifies where Drush should be installed to.
+
+Defaults to <tt>/usr/share/php/drush</tt>.
+
+=== version
+
+In the <tt>drush::pear</tt> recipe, this specifies which version of Drush to install.
+
+In the <tt>drush::git</tt> recipe, this specifies which branch, tag or commit to check out.
+
+Defaults to +stable+.
+
+=== allreleases
+
+This attribute is used in the in the <tt>drush::pear</tt> recipe.
+
+Specifies where to get a list of available Drush releases.
+
+Defaults to <tt>http://pear.drush.org/rest/r/drush/allreleases.xml</tt>.
+
+=== make
+
+This attribute is used in the <tt>drush::make</tt> recipe
+
+* <tt>node['drush']['make']['version']</tt> - Specifies the version of Drush Make to install. Defaults to +2.3+.
+
+== Installation
+
+=== Using Berkshelf
+
+Include the following line in your Berksfile:
+
+    cookbook 'drush', github: 'msonnabaum/chef-drush'
+
+=== Using Librarian-Chef
+
+Include the following code in your Cheffile
+
+    cookbook 'drush',
+      :github => "msonnabaum/chef-drush",
+
+=== As a Git Submodule
+
+Run the following at a terminal:
+
+    cd chef-repo
+    git submodule add git://github.com/msonnabaum/chef-drush.git cookbooks/drush
+    git submodule init && git submodule update
