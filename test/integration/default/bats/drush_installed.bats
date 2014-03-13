@@ -4,3 +4,8 @@
   run which drush
   [ "$status" -eq 0 ]
 }
+
+@test "drush status runs" {
+  run drush status
+  [ "$status" -eq 0 ]
+}
