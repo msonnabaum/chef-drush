@@ -1,4 +1,4 @@
-# 
+#
 # Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
 # Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-php_pear "Console_Table" do
+php_pear 'Console_Table' do
   action :install
   version '1.1.6'
 end
