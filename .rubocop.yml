@@ -4,8 +4,6 @@ AllCops:
 
 AlignParameters:
   Enabled: false
-ClassAndModuleChildren:
-  Enabled: false
 Encoding:
   Enabled: false
 LineLength:
