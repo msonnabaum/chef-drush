@@ -1,4 +1,4 @@
-# 
+#
 # Author:: David King <dking@xforty.com>
 # Cookbook Name:: drush
 # Recipe:: make
@@ -17,11 +17,11 @@
 #
 
 # Make sure drush is installed first
-include_recipe "drush"
+include_recipe 'drush'
 
 # Install drush_make
 # TODO: come up with a way to allow users to update drush_make
-execute "install_drush_make" do
+execute 'install_drush_make' do
   command "drush dl drush_make-6.x-#{node['drush']['make']['version']} --destination=#{node['drush']['install_dir']}/commands"
-  not_if "drush make --help"
+  not_if 'drush make --help'
 end

@@ -16,17 +16,17 @@
 # limitations under the License.
 #
 
-require_recipe "git"
+require_recipe 'git'
 
 case node[:platform]
-when "debian", "ubuntu", "centos", "redhat"
+when 'debian', 'ubuntu', 'centos', 'redhat'
   git node['drush']['install_dir'] do
-    repository "https://github.com/drush-ops/drush.git"
+    repository 'https://github.com/drush-ops/drush.git'
     reference node['drush']['version']
     action :sync
   end
 
-  link "/usr/bin/drush" do
+  link '/usr/bin/drush' do
     to "#{node['drush']['install_dir']}/drush"
   end
 end

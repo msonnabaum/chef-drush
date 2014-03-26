@@ -1,4 +1,4 @@
-# 
+#
 # Author:: Mark Sonnabaum <mark.sonnabaum@acquia.com>
 # Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "php"
+include_recipe 'php'
 
 # If drush version is a preferred state, get the latest version of that state
 case node['drush']['version']
@@ -34,12 +34,12 @@ when 'stable', 'beta', 'devel'
 end
 
 # Initialize drush PEAR channel
-dc = php_pear_channel "pear.drush.org" do
+dc = php_pear_channel 'pear.drush.org' do
   action :discover
 end
 
 # Install drush
-php_pear "drush" do
+php_pear 'drush' do
   version node['drush']['version']
   channel dc.channel_name
   action :install

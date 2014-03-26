@@ -28,21 +28,19 @@ def whyrun_supported?
 end
 
 action :run do
-    command = ""
-    if @new_resource.cwd
-        command << "cd #{@new_resource.cwd} && "
+  command = ''
+  command << "cd #{@new_resource.cwd} && " if @new_resource.cwd
+  command << "drush #{@new_resource.command}"
+  if @new_resource.options && !new_resource.options.empty?
+    @new_resource.options.each do |option, value|
+      command << " #{option}"
+      command << "#{value}" if value && !value.empty?
     end
-    command << "drush #{@new_resource.command}"
-    if @new_resource.options and !new_resource.options.empty?
-        @new_resource.options.each do |option, value|
-            command << " #{option}"
-            command << "#{value}" if value and !value.empty?
-        end
-    end
+  end
 
-    # Drush force yes option
-    command << " --yes"
+  # Drush force yes option
+  command << ' --yes'
 
-    Chef::Log.info(command)
-    shell_out!(command)
+  Chef::Log.info(command)
+  shell_out!(command)
 end
