@@ -36,7 +36,6 @@ when "debian", "ubuntu", "centos", "redhat"
       cwd node['drush']['install_dir']
       command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
       action :run
-      only_if "which composer"
       not_if do
         ::File.exists?("#{node['drush']['install_dir']}/vendor/autoload.php")
       end
@@ -46,7 +45,6 @@ when "debian", "ubuntu", "centos", "redhat"
       cwd node['drush']['install_dir']
       command "#{node['composer']['bin']} update --no-interaction --no-ansi --quiet --no-dev"
       action :run
-      only_if "which composer"
     end
   end
 end
