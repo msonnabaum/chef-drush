@@ -36,9 +36,7 @@ when "debian", "ubuntu", "centos", "redhat"
       cwd node['drush']['install_dir']
       command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
       action :run
-      not_if do
-        ::File.exists?("#{node['drush']['install_dir']}/vendor/autoload.php")
-      end
+      not_if { ::File.exists?("#{node['drush']['install_dir']}/vendor/autoload.php") }
     end
 
     execute "drush-composer-update" do
