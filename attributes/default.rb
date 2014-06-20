@@ -1,4 +1,4 @@
-# 
+#
 # Author:: David King <dking@xforty.com>
 # Contributor:: Patrick Connolly <patrick@myplanetdigital.com>
 # Cookbook Name:: drush
@@ -20,6 +20,8 @@
 # Options: pear, git
 default['drush']['install_method'] = "pear"
 
+default['drush']['gitrep'] = "git://git.drupalcode.org/project/drush.git"
+
 # Used for drush install via git and make install (PEAR stores here by default).
 default['drush']['install_dir'] = "/usr/share/php/drush"
 
@@ -34,3 +36,4 @@ default['drush']['allreleases'] = "http://pear.drush.org/rest/r/drush/allrelease
 # Version number (without drupal major version) from
 # http://drupal.org/project/drush_make
 default['drush']['make']['version'] = "2.3"
+
