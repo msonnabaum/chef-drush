@@ -19,5 +19,5 @@
 
 php_pear "Console_Table" do
   action :install
-  version '1.1.6'
+  version node['drush']['console_table_version']
 end
