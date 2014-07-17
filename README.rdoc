@@ -1,6 +1,6 @@
 = DESCRIPTION:
 
-Installs the Drush CLI tool for Drupal, either via PEAR package or directly from source via Git.
+Installs the Drush CLI tool for Drupal, either via PEAR package, Composer, or directly from source via Git.
 Also included is a recipe that can be used to install drush_make via the `drush pm-download` command.
 
 = REQUIREMENTS:
@@ -9,7 +9,7 @@ Also included is a recipe that can be used to install drush_make via the `drush 
 
 = PLATFORMS:
 
-The following platforms are supported by this cookbook, meaning that the 
+The following platforms are supported by this cookbook, meaning that the
 recipes run on these platforms without error.
 
 * Debian
@@ -31,6 +31,10 @@ Installs drush via PEAR package manager.
 
 Install drush via Git from source repository.
 
+== composer:
+
+Install drush via composer.
+
 == upgrade_pear:
 
 Upgrades PEAR to v1.9.1, which meets minimum required by drush via PEAR.
@@ -48,7 +52,7 @@ is already available, this command will not be run.
 
 == default:
 
-* `node['drush']['install_method']` - Indicates the desired install method, currently either `git` or `pear`.
+* `node['drush']['install_method']` - Indicates the desired install method, currently either `git`, `composer` or `pear`.
 * `node['drush']['version']` - Drush preferred state (stable, beta, devel) or version of format x.y.z when install_method is pear (eg. 5.0.0).
 When install_method is git, the format is a git reference commit/tag/branch (eg. 31d768a / 7.x-4.x / 7.x-5.0 )
 * `node['drush']['allreleases']` - URL of allreleases.xml for pear to install from preferred states.
