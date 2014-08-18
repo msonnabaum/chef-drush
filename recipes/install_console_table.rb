@@ -18,6 +18,6 @@
 #
 
 php_pear "Console_Table" do
-  action :upgrade
+  action :install
   version '1.1.6'
 end
