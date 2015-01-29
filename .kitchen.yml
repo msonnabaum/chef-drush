@@ -18,8 +18,15 @@ suites:
     attributes:
   - name: git
     run_list:
-      - recipe[php]
-      - recipe[composer]
+      - recipe[git]
+      - recipe[drush::default]
+    attributes:
+      drush:
+        install_method: 'git'
+        version: '6.x'
+  - name: git-7
+    run_list:
+      - recipe[git]
       - recipe[drush::default]
     attributes:
       drush:
