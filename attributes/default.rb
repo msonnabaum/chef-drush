@@ -34,3 +34,6 @@ default['drush']['allreleases'] = "http://pear.drush.org/rest/r/drush/allrelease
 # Version number (without drupal major version) from
 # http://drupal.org/project/drush_make
 default['drush']['make']['version'] = "2.3"
+
+# The console table recipe fails if a newer version is already installed.
+default['drush']['console_table']['version'] = "1.1.6"
