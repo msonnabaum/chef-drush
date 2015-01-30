@@ -30,6 +30,7 @@ suites:
   - name: git-7
     run_list:
       - recipe[git]
+      - recipe[composer]
       - recipe[drush::default]
     attributes:
       drush:
