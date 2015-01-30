@@ -30,7 +30,7 @@ when "debian", "ubuntu", "centos", "redhat"
     to "#{node['drush']['install_dir']}/drush"
   end
 
-  if node['drush']['version'] == 'master'
+  if node['drush']['version'] == 'master' || Gem::Dependency.new('', '~> 7').match?('', node['drush']['version'])
     include_recipe "composer"
     execute "drush-composer-install" do
       cwd node['drush']['install_dir']
