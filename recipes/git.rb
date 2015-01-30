@@ -35,14 +35,8 @@ when "debian", "ubuntu", "centos", "redhat"
     execute "drush-composer-install" do
       cwd node['drush']['install_dir']
       command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
-      action :run
-      not_if { ::File.exists?("#{node['drush']['install_dir']}/vendor/autoload.php") }
-    end
-
-    execute "drush-composer-update" do
-      cwd node['drush']['install_dir']
-      command "#{node['composer']['bin']} update --no-interaction --no-ansi --quiet --no-dev"
-      action :run
+      action :nothing
+      subscribes :run, "git[#{node['drush']['install_dir']}]"
     end
   end
 end
