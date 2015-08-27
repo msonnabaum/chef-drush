@@ -18,7 +18,18 @@
 #
 
 include_recipe "php"
+
+if node['drush']['version'].split('.').first.to_i >= 7 and node['drush']['install_method'] == 'pear'
+  Chef::Application.fatal('Drush versions above 7.0 are no longer available via PEAR. Use "github" or "git" install method to get those installed')
+end
+
 # Upgrade PEAR if current version is < 1.9.1
 include_recipe "drush::upgrade_pear" if node['drush']['install_method'] == "pear"
-include_recipe "drush::install_console_table"
+
+# Install Console_Table only if drush version is < 6.x, since
+# 6.x and above uses Composer to install requirements
+if node['drush']['version'].split('.').first.to_i < 6
+  include_recipe "drush::install_console_table"
+end
+
 include_recipe "drush::#{node['drush']['install_method']}"
