@@ -30,3 +30,15 @@ when "debian", "ubuntu", "centos", "redhat"
     to "#{node['drush']['install_dir']}/drush"
   end
 end
+
+# We have to run composer against the directory if we using 7.x or above
+if node['drush']['version'].split('.').first.to_i > 6
+  require_recipe "composer"
+  
+  execute 'install-drush-deps' do
+    command "composer require"
+    cwd     node['drush']['install_dir']
+    user    'root'
+    group   'root'
+  end
+end
