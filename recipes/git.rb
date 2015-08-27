@@ -31,14 +31,13 @@ when "debian", "ubuntu", "centos", "redhat"
   end
 end
 
-# We have to run composer against the directory if we using 7.x or above
-if node['drush']['version'].split('.').first.to_i > 6
-  require_recipe "composer"
-  
-  execute 'install-drush-deps' do
-    command "composer require"
-    cwd     node['drush']['install_dir']
-    user    'root'
-    group   'root'
-  end
+# We have to run composer against the directory if we using 6.x or above
+require_recipe "composer"
+
+execute 'install-drush-deps' do
+  command "composer require"
+  cwd     node['drush']['install_dir']
+  user    'root'
+  group   'root'
+  only_if { File.exists?(node['composer']['bin']) && File.exists?(node['drush']['install_dir'] + '/composer.json') }
 end
