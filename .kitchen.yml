@@ -19,3 +19,10 @@ suites:
     run_list:
       - recipe[drush::default]
     attributes:
+  - name: default
+    run_list:
+      - recipe[drush::default]
+    attributes:
+      drush:
+        install_method: git
+          version: 6.x

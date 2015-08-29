@@ -23,10 +23,23 @@ when "debian", "ubuntu", "centos", "redhat"
   git node['drush']['install_dir'] do
     repository "https://github.com/drush-ops/drush.git"
     reference node['drush']['version']
+    notifies :run, 'execute[install-drush-deps]', :immediately
     action :sync
   end
 
   link "/usr/bin/drush" do
     to "#{node['drush']['install_dir']}/drush"
   end
+end
+
+# We have to run composer against the directory if we using 6.x or above
+require_recipe "composer"
+
+execute 'install-drush-deps' do
+  command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
+  cwd     node['drush']['install_dir']
+  user    'root'
+  group   'root'
+  only_if { File.exists?(node['composer']['bin']) && File.exists?(node['drush']['install_dir'] + '/composer.json') }
+  action  :nothing
 end
