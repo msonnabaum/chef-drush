@@ -23,6 +23,7 @@ when "debian", "ubuntu", "centos", "redhat"
   git node['drush']['install_dir'] do
     repository "https://github.com/drush-ops/drush.git"
     reference node['drush']['version']
+    notifies :run, 'execute[install-drush-deps]', :immediately
     action :sync
   end
 
@@ -35,9 +36,10 @@ end
 require_recipe "composer"
 
 execute 'install-drush-deps' do
-  command "composer require"
+  command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
   cwd     node['drush']['install_dir']
   user    'root'
   group   'root'
   only_if { File.exists?(node['composer']['bin']) && File.exists?(node['drush']['install_dir'] + '/composer.json') }
+  action  :nothing
 end
