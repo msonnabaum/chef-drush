@@ -18,13 +18,8 @@
 
 include_recipe "git"
 
-use_composer = node['drush']['version'] == 'master' || Gem::Dependency.new('', '~> 7').match?('', node['drush']['version'])
-
 case node[:platform]
 when "debian", "ubuntu", "centos", "redhat"
-
-  # ensure composer is installed before it gets used.
-  include_recipe 'composer' if use_composer
 
   git node['drush']['install_dir'] do
     repository "https://github.com/drush-ops/drush.git"
@@ -36,13 +31,13 @@ when "debian", "ubuntu", "centos", "redhat"
     to "#{node['drush']['install_dir']}/drush"
   end
 
-  if use_composer
-    execute "drush-composer-install" do
-      cwd node['drush']['install_dir']
-      command "#{node['composer']['bin']} install --no-interaction --no-ansi --quiet --no-dev"
-      action :nothing
-      subscribes :run, "git[#{node['drush']['install_dir']}]", :immediately
-      only_if { File.exist?(node['composer']['bin']) }
-    end
+  # ensure composer is installed before it gets used.
+  include_recipe 'composer'
+  execute "drush-composer-install" do
+    cwd node['drush']['install_dir']
+    command "#{node['composer']['bin']} install --no-interaction --no-ansi --no-dev"
+    action :nothing
+    subscribes :run, "git[#{node['drush']['install_dir']}]", :delayed
+    only_if { File.exists?(node['composer']['bin']) && File.exists?(node['drush']['install_dir'] + '/composer.lock') }
   end
 end
